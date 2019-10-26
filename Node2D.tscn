@@ -1,0 +1,196 @@
+[gd_scene load_steps=36 format=2]
+
+[ext_resource path="res://scripts/Main.gd" type="Script" id=1]
+[ext_resource path="res://scripts/LevelEnumerator.gd" type="Script" id=2]
+[ext_resource path="res://images/backgrounds/background24.png" type="Texture" id=3]
+[ext_resource path="res://scripts/Background.gd" type="Script" id=4]
+[ext_resource path="res://scripts/Game.gd" type="Script" id=5]
+[ext_resource path="res://scripts/BackgroundField.gd" type="Script" id=6]
+[ext_resource path="res://images/player/skin0/player.png" type="Texture" id=7]
+[ext_resource path="res://scripts/player.gd" type="Script" id=8]
+[ext_resource path="res://scripts/EnemyField.gd" type="Script" id=9]
+[ext_resource path="res://fonts/thinFont.tres" type="DynamicFont" id=10]
+[ext_resource path="res://scripts/Label3.gd" type="Script" id=11]
+[ext_resource path="res://fonts/blockFont.tres" type="DynamicFont" id=12]
+[ext_resource path="res://images/pause.png" type="Texture" id=13]
+[ext_resource path="res://scripts/Pause.gd" type="Script" id=14]
+[ext_resource path="res://images/xp.png" type="Texture" id=15]
+[ext_resource path="res://scripts/XPBar.gd" type="Script" id=16]
+[ext_resource path="res://scripts/XPBarProgress.gd" type="Script" id=17]
+[ext_resource path="res://images/xptext.png" type="Texture" id=18]
+[ext_resource path="res://images/joystickcenter.png" type="Texture" id=19]
+[ext_resource path="res://scripts/Joystick.gd" type="Script" id=20]
+[ext_resource path="res://images/joystickfinger.png" type="Texture" id=21]
+[ext_resource path="res://sounds/music/track3.ogg" type="AudioStream" id=22]
+[ext_resource path="res://scripts/Music.gd" type="Script" id=23]
+[ext_resource path="res://sounds/music/track0.ogg" type="AudioStream" id=24]
+[ext_resource path="res://scripts/WaitMusic.gd" type="Script" id=25]
+[ext_resource path="res://sounds/sfx/death.ogg" type="AudioStream" id=26]
+[ext_resource path="res://sounds/sfx/plus1sf.ogg" type="AudioStream" id=27]
+[ext_resource path="res://images/overlay.png" type="Texture" id=28]
+[ext_resource path="res://scripts/Overlay.gd" type="Script" id=29]
+[ext_resource path="res://shaders/invert.tres" type="Material" id=30]
+[ext_resource path="res://images/white.png" type="Texture" id=31]
+[ext_resource path="res://scripts/InvertShader.gd" type="Script" id=32]
+[ext_resource path="res://shaders/bloom.shader" type="Shader" id=33]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 33 )
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="LevelEnumerator" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="Background" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+centered = false
+script = ExtResource( 4 )
+
+[node name="Game" type="Node2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="BackgroundField" type="Node2D" parent="Game"]
+script = ExtResource( 6 )
+
+[node name="Player" type="Sprite" parent="Game"]
+texture = ExtResource( 7 )
+script = ExtResource( 8 )
+
+[node name="EnemyField" type="Node2D" parent="Game"]
+script = ExtResource( 9 )
+
+[node name="TapToStart" type="Label" parent="Game"]
+anchor_right = 1.0
+anchor_bottom = 0.78
+margin_left = -68.57
+margin_top = -23.55
+margin_right = 67.43
+margin_bottom = -7.54999
+grow_horizontal = 2
+rect_scale = Vector2( 0.5, 0.5 )
+rect_pivot_offset = Vector2( 70.27, 8.98 )
+custom_fonts/font = ExtResource( 10 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 2
+text = "TAP TO START"
+align = 1
+valign = 1
+script = ExtResource( 11 )
+
+[node name="Score" type="Label" parent="."]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 45.0
+margin_bottom = 21.0
+custom_fonts/font = ExtResource( 12 )
+text = "0"
+uppercase = true
+
+[node name="Highscore" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0.490196 )
+margin_left = 5.0
+margin_top = 19.78
+margin_right = 147.0
+margin_bottom = 35.78
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 10 )
+text = "best 0"
+
+[node name="Pause" type="Sprite" parent="."]
+position = Vector2( 40.32, 0 )
+texture = ExtResource( 13 )
+centered = false
+script = ExtResource( 14 )
+
+[node name="Area2D" type="Area2D" parent="Pause"]
+position = Vector2( 6.12, 6.07 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pause/Area2D"]
+scale = Vector2( 0.77, 0.76 )
+shape = SubResource( 1 )
+
+[node name="XPBar" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.615686 )
+self_modulate = Color( 1, 1, 1, 0.345098 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 15 )
+centered = false
+script = ExtResource( 16 )
+
+[node name="XPBarProgress" type="Sprite" parent="XPBar"]
+scale = Vector2( 0.64, 1 )
+texture = ExtResource( 15 )
+centered = false
+script = ExtResource( 17 )
+
+[node name="XPText" type="Sprite" parent="XPBar"]
+position = Vector2( -19, 0 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 18 )
+centered = false
+
+[node name="Joystick" type="Sprite" parent="."]
+editor/display_folded = true
+modulate = Color( 1, 1, 1, 0.180392 )
+position = Vector2( 143.56, 54.15 )
+texture = ExtResource( 19 )
+script = ExtResource( 20 )
+
+[node name="JoystickFinger" type="Sprite" parent="Joystick"]
+position = Vector2( -9.63, -14.87 )
+texture = ExtResource( 21 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 22 )
+pitch_scale = 0.2
+stream_paused = true
+script = ExtResource( 23 )
+
+[node name="WaitMusic" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 24 )
+autoplay = true
+script = ExtResource( 25 )
+
+[node name="DeathSFX" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 26 )
+volume_db = -10.0
+
+[node name="Plus1SFX" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 27 )
+volume_db = -17.0
+
+[node name="Overlay" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.454902 )
+texture = ExtResource( 28 )
+centered = false
+script = ExtResource( 29 )
+
+[node name="InvertShader" type="TextureRect" parent="."]
+visible = false
+material = ExtResource( 30 )
+margin_right = 240.0
+margin_bottom = 135.0
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 31 )
+expand = true
+script = ExtResource( 32 )
+
+[node name="InvertShader2" type="TextureRect" parent="."]
+material = SubResource( 2 )
+margin_right = 240.0
+margin_bottom = 135.0
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 31 )
+expand = true
+
+[connection signal="input_event" from="Pause/Area2D" to="Pause" method="_on_Area2D_input_event"]
+[connection signal="mouse_entered" from="Pause/Area2D" to="Pause" method="_on_Area2D_mouse_entered"]
+[connection signal="mouse_exited" from="Pause/Area2D" to="Pause" method="_on_Area2D_mouse_exited"]
