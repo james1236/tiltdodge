@@ -14,8 +14,14 @@ var musicArray = [
 ];
 
 func _ready():
-	music = floor(rand_range(0,len(musicArray)));
-	#music = 2;
+	setTrack()
+		
+func setTrack(index=-1):
+	if (index < 0):
+		music = floor(rand_range(0,len(musicArray)));
+	else:
+		music = index;
+		
 	self.set_stream(musicArray[music].file);
 	self.play();
 	self.stream_paused = true;

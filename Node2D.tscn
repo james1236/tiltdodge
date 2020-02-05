@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://scripts/LevelEnumerator.gd" type="Script" id=2]
@@ -27,17 +27,19 @@
 [ext_resource path="res://scripts/WaitMusic.gd" type="Script" id=25]
 [ext_resource path="res://sounds/sfx/death.ogg" type="AudioStream" id=26]
 [ext_resource path="res://sounds/sfx/plus1sf.ogg" type="AudioStream" id=27]
-[ext_resource path="res://images/overlay.png" type="Texture" id=28]
-[ext_resource path="res://scripts/Overlay.gd" type="Script" id=29]
-[ext_resource path="res://shaders/invert.tres" type="Material" id=30]
-[ext_resource path="res://images/white.png" type="Texture" id=31]
-[ext_resource path="res://scripts/InvertShader.gd" type="Script" id=32]
-[ext_resource path="res://shaders/bloom.shader" type="Shader" id=33]
+[ext_resource path="res://sounds/sfx/plus1sflow.ogg" type="AudioStream" id=28]
+[ext_resource path="res://sounds/sfx/plus1sfhigh.ogg" type="AudioStream" id=29]
+[ext_resource path="res://images/overlay.png" type="Texture" id=30]
+[ext_resource path="res://scripts/Overlay.gd" type="Script" id=31]
+[ext_resource path="res://shaders/invert.tres" type="Material" id=32]
+[ext_resource path="res://images/white.png" type="Texture" id=33]
+[ext_resource path="res://scripts/InvertShader.gd" type="Script" id=34]
+[ext_resource path="res://shaders/bloom.shader" type="Shader" id=35]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 [sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 33 )
+shader = ExtResource( 35 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
@@ -134,7 +136,6 @@ texture = ExtResource( 18 )
 centered = false
 
 [node name="Joystick" type="Sprite" parent="."]
-editor/display_folded = true
 modulate = Color( 1, 1, 1, 0.180392 )
 position = Vector2( 143.56, 54.15 )
 texture = ExtResource( 19 )
@@ -163,23 +164,31 @@ volume_db = -10.0
 stream = ExtResource( 27 )
 volume_db = -17.0
 
+[node name="Plus1SFXLow" type="AudioStreamPlayer" parent="Music/Plus1SFX"]
+stream = ExtResource( 28 )
+volume_db = -20.0
+
+[node name="Plus1SFXHigh" type="AudioStreamPlayer" parent="Music/Plus1SFX"]
+stream = ExtResource( 29 )
+volume_db = -20.0
+
 [node name="Overlay" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.454902 )
-texture = ExtResource( 28 )
+texture = ExtResource( 30 )
 centered = false
-script = ExtResource( 29 )
+script = ExtResource( 31 )
 
 [node name="InvertShader" type="TextureRect" parent="."]
 visible = false
-material = ExtResource( 30 )
+material = ExtResource( 32 )
 margin_right = 240.0
 margin_bottom = 135.0
 mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 31 )
+texture = ExtResource( 33 )
 expand = true
-script = ExtResource( 32 )
+script = ExtResource( 34 )
 
 [node name="InvertShader2" type="TextureRect" parent="."]
 material = SubResource( 2 )
@@ -188,9 +197,8 @@ margin_bottom = 135.0
 mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 31 )
+texture = ExtResource( 33 )
 expand = true
-
 [connection signal="input_event" from="Pause/Area2D" to="Pause" method="_on_Area2D_input_event"]
 [connection signal="mouse_entered" from="Pause/Area2D" to="Pause" method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="Pause/Area2D" to="Pause" method="_on_Area2D_mouse_exited"]

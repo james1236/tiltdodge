@@ -9,16 +9,17 @@ func _ready():
 
 func _process(delta):
 	#Animate on new score
-	if ((get_node("../../Game").started or get_node("../../Game").dead) and (get_node("../../").gameTimer % 60 == 0 && get_node("../../").timer == get_node("../../").highscore && get_node("../../").highscore > 0 && self.scale.x != 1)):
+	if ((get_node("../../Game").started or get_node("../../Game").dead) and (get_node("../../").gameTimer % 60 == 0 && self.scale.x != 1) and (get_node("../../").gameTimer > 1)):
 		bounceTimer = 2;
 		get_parent().position.y -= bounceTimer;
-		self.set_modulate(Color(1,1,1,1));
+		get_node("../../Game/Player").scale = (Vector2(1+bounceTimer/10,1+bounceTimer/10));
+		if (get_node("../../").timer == get_node("../../").highscore && get_node("../../").highscore > 0):
+			self.set_modulate(Color(1,1,1,1));
 	
 	if (bounceTimer > 0):
 		bounceTimer-=0.25;
 		get_parent().position.y += 0.25;
-		
-	get_node("../../Game/Player").scale = (Vector2(1+bounceTimer/10,1+bounceTimer/10));
+		get_node("../../Game/Player").scale = (Vector2(1+bounceTimer/10,1+bounceTimer/10));
 		
 	#Run score updates only when paused or a +1 has been obtained (syncs +1s)
 	if (get_node("../../Game").paused or get_node("../../").gameTimer % 60 == 0):

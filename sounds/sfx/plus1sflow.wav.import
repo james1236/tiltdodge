@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/plus1sflow.wav-18e5128a4d10db275b19464a6bd1edd1.sample"
+
+[deps]
+
+source_file="res://sounds/sfx/plus1sflow.wav"
+dest_files=[ "res://.import/plus1sflow.wav-18e5128a4d10db275b19464a6bd1edd1.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

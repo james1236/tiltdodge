@@ -25,6 +25,8 @@ var enemyScript = preload("res://scripts/enemy.gd");
 var missileTexture = preload("res://images/missile.png");
 var missileScript = preload("res://scripts/missile.gd");
 var missileTrailTexture = preload("res://images/missiletrail.png");
+var missileTrailParticlesTexture = preload("res://images/trailparticle.png");
+var missileTrailParticleShader = preload("res://shaders/trailParticleShader.tres");
 var missileTrailScript = preload("res://scripts/missileTrail.gd");
 
 var missileIdents = [];
@@ -166,6 +168,13 @@ func generateMissiles(quantity=1,meteor=false):
 			missile.scale = Vector2(2,2);
 			missile.magnitude = 7;
 			missile.diameter = 16;
+			
+		var missileTrailParticles = Particles2D.new();
+		missileTrailParticles.amount = 9;
+		missileTrailParticles.lifetime = 2;
+		missileTrailParticles.speed_scale = 1.5;
+		missileTrailParticles.texture = missileTrailParticlesTexture;
+		missileTrailParticles.process_material = missileTrailParticleShader;
 		
 		if (j == 0):
 			if (k == 0):
@@ -195,6 +204,7 @@ func generateMissiles(quantity=1,meteor=false):
 				missile.bearing = 180;
 		
 		missile.add_child(missileTrail);
+		missileTrail.add_child(missileTrailParticles);
 		self.add_child(missile);
 
 func seperate():

@@ -137,6 +137,10 @@ func respawn():
 	get_node("../Overlay").hide();
 	get_node("../InvertShader").away();
 	get_node("../Music/Plus1SFX").pitch_scale = 1;
+	get_node("../Music/Plus1SFX/Plus1SFXLow").pitch_scale = 1;
+	get_node("../Music/Plus1SFX/Plus1SFXHigh").pitch_scale = 1;
+	
+	get_node("../Music").setTrack()
 	
 	unpause();
 

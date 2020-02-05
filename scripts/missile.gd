@@ -46,6 +46,12 @@ func despawn():
 
 func pause():
 	paused = true;
-	
+	for child in get_children():
+		if (child.has_method("pause")):
+			child.pause();
+			
 func unpause():
 	paused = false;
+	for child in get_children():
+		if (child.has_method("unpause")):
+			child.unpause();

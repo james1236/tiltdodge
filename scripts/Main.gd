@@ -19,12 +19,18 @@ func _process(delta):
 		if (timer > highscore):
 			highscore = timer;
 			get_node("Highscore").set_text("best "+formattedTimer);
-			if (gameTimer % 60 == 0):
+			if ((gameTimer % 60 == 0) && (gameTimer > 1)):
 				get_node("Game/Player").generatePlus1();
-				if (7 > get_node("Music/Plus1SFX").pitch_scale):
-					get_node("Music/Plus1SFX").pitch_scale+=0.05;
+				get_node("Music/Plus1SFX/Plus1SFXLow").play();
+				get_node("Music/Plus1SFX/Plus1SFXHigh").play();
+				
+		if ((gameTimer % 60 == 0) && (gameTimer > 1)):
+			if (7 > get_node("Music/Plus1SFX").pitch_scale):
+				get_node("Music/Plus1SFX").pitch_scale+=0.05;
+				get_node("Music/Plus1SFX/Plus1SFXLow").pitch_scale+=0.05;
+				get_node("Music/Plus1SFX/Plus1SFXHigh").pitch_scale+=0.05;
 				get_node("Music/Plus1SFX").play();
-		
+				
 		#Invert Shader
 		if (gameTimer == invertTime):
 			get_node("InvertShader").reveal();

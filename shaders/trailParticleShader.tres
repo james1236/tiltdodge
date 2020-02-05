@@ -1,0 +1,18 @@
+[gd_resource type="ParticlesMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://shaders/fadeGradientTeture.tres" type="Texture" id=1]
+
+[resource]
+emission_shape = 1
+emission_sphere_radius = 3.29
+flag_disable_z = true
+gravity = Vector3( 0, 100, 0 )
+angular_velocity = 48.7
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -50.0
+angle = 311.0
+angle_random = 1.0
+scale_random = 1.0
+color_ramp = ExtResource( 1 )

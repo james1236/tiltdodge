@@ -127,9 +127,11 @@ func sqr(num):
 func pause():
 	paused = true;
 	for child in get_children():
-		child.pause();
-
+		if (child.has_method("pause")):
+			child.pause();
+			
 func unpause():
 	paused = false;
 	for child in get_children():
-		child.unpause();
+		if (child.has_method("unpause")):
+			child.unpause();
